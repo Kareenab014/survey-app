@@ -12,7 +12,7 @@
 const { configure } = require('quasar/wrappers');
 
 
-module.exports = configure(function (/* ctx */) {
+module.exports = configure(function ( ctx ) {
   return {
     eslint: {
       // fix: true,
@@ -61,6 +61,16 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+      env: {
+        SERVER_URL: ctx.dev ? 'http://localhost:3000' : 'http://<YOUR_PROD_IP>',
+        CREATOR_NAME: 'Kareena Boodram',
+        CREATOR_EMAIL: 'kareena.boodram021@gmail.com'
+      },
+      distDir: '../server/public'
+
+      
+
+
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -86,7 +96,11 @@ module.exports = configure(function (/* ctx */) {
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
-    devServer: {
+    devServer: {htmlVariables: {
+     productName: 'BAHS Student Job Survey App',
+     productDescription: 'The Bronx Aerospace High School Student Survey App collects job preferences from high school students.'
+   },
+
       // https: true
       open: true // opens browser window automatically
     },
@@ -106,7 +120,9 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [ 
+        'Notify'
+      ]
     },
 
     // animations: 'all', // --- includes all animations
